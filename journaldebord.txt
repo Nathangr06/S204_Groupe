@@ -1,0 +1,4 @@
+24/03/2025 : Nathan création du script et création des insert 
+Furkan a fait un MCD,débute journal de bord et un arbre effectué
+Sofien s'occupe des requetes
+Akim debute le diaporama et les requetes
