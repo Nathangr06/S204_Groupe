@@ -48,10 +48,12 @@ print("Le choix d'un diagramme en bande pour ces informations \
 
 Jointure_Bien_Espace = pandas.concat([Bien, Espace], axis = 1)
 Corr = Jointure_Bien_Espace["PRIX"].corr(Jointure_Bien_Espace["SUPERFICIE"])
+
 plt.scatter(Jointure_Bien_Espace["SUPERFICIE"], Jointure_Bien_Espace["PRIX"])
 plt.title("Corrélation entre le prix et la surface")
 plt.xlabel("Superficie")
 plt.ylabel("Prix")
+
 coeffs= np.polyfit(Jointure_Bien_Espace["SUPERFICIE"], Jointure_Bien_Espace["PRIX"], 1)
 print(coeffs)
 plt.plot(Jointure_Bien_Espace["SUPERFICIE"], coeffs[0] * Jointure_Bien_Espace["SUPERFICIE"] + coeffs[1], color='red')
