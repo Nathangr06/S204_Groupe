@@ -42,3 +42,18 @@ print("Le choix d'un diagramme en bande pour ces informations \
 
 
 #Faire diagramme en boite des prix des différents biens
+
+
+#Corrélation entre le prix et la surface des biens (corriger calcul des coeffs)
+
+Jointure_Bien_Espace = pandas.concat([Bien, Espace], axis = 1)
+Corr = Jointure_Bien_Espace["PRIX"].corr(Jointure_Bien_Espace["SUPERFICIE"])
+plt.scatter(Jointure_Bien_Espace["SUPERFICIE"], Jointure_Bien_Espace["PRIX"])
+plt.title("Corrélation entre le prix et la surface")
+plt.xlabel("Superficie")
+plt.ylabel("Prix")
+coeffs= np.polyfit(Jointure_Bien_Espace["SUPERFICIE"], Jointure_Bien_Espace["PRIX"], 1)
+print(coeffs)
+plt.plot(Jointure_Bien_Espace["SUPERFICIE"], coeffs[0] * Jointure_Bien_Espace["SUPERFICIE"] + coeffs[1], color='red')
+plt.show()
+print("La corrélation entre le prix et la surface est de : ", Corr)
