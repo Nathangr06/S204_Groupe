@@ -3,11 +3,30 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+"""
+Appartement studio : 60 
+Villa : 320
+Appartement T3 : 10270
+Chalet : 166
+HLM : 51
+BUngalow : 36
+Maison de ville : 136
+Bidonville : 30
+"""
+
 #Importation de la table
 
 Bien = pandas.read_csv("BIEN_DATA_TABLE.csv")
 Espace = pandas.read_csv("ESPACE_DATA_TABLE.csv")
 Proprio = pandas.read_csv("PROPRIO_DATA_TABLE.csv")
+
+print("Table Bien :")
+print(Bien)
+print("Table Espace :")
+print(Espace)
+print("Table Proprio :")
+print(Proprio)
+print()
 
 #Prix moyen des bien
 
@@ -46,10 +65,8 @@ print()
 
 
 
-#Corrélation entre le prix et la surface des biens (corriger calcul des coeffs)
-Bien_Sans_Manoir = Bien[Bien['CATEGORIE'] != 'MANOIR']
-
-JointureBienEspace = pandas.merge(Bien_Sans_Manoir, Espace, left_on="IDEBIEN", right_on="IDE")
+#Corrélation entre le prix et la surface des biens
+JointureBienEspace = pandas.merge(Bien, Espace, left_on="IDEBIEN", right_on="IDE")
 JointureBienEspace = JointureBienEspace.dropna(subset=['SUPERFICIE', 'PRIX'])
 correlation = JointureBienEspace['SUPERFICIE'].corr(JointureBienEspace['PRIX'])
 plt.scatter(JointureBienEspace['SUPERFICIE'], JointureBienEspace['PRIX'])
@@ -75,18 +92,19 @@ print("Le choix de l'utilisation d'une droite sur un graphe de nuage de points s
 #Diagramme en barre de la répartition des biens par ville
 ville_cp = Bien['VILLE'].value_counts()
 ville_cp.plot.bar(width = 0.5, edgecolor = 'black')
-plt.title("Répartition des biens par ville")
+plt.title("Répartition des biens par villplt.figure(figsize=(12, 6))e")
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.xlabel('Ville')
 plt.ylabel('Nombre de Biens')
 plt.show()
 
-print("..")
+print("Le diagramme en barre est pertinent car il permet de visualiser \
+      la répartition des biens par ville de manière claire et concise \
+      et de comparer facilement le nombre de biens dans chaque ville.")
 
 
-
-# Visualisation : Diagrammes en barres
+#Diagrammes en barres de la répartition des biens par catégorie et par type
 categorie_cp = Bien['CATEGORIE'].value_counts()
 type_cp = Bien['TYPE'].value_counts()
 plt.figure(figsize=(12, 6))
@@ -106,3 +124,6 @@ plt.ylabel('Nombre de Biens')
 plt.tight_layout()
 plt.show()
 
+print("Le choix d'un diagramme en barre pour la répartition des biens par catégorie et par type est pertinent car \
+      il permet de visualiser facilement les différences entre les catégories et les types de biens. \
+      De plus, le diagramme en barre est efficace pour comparer des valeurs discrètes et est facilement lisible.")
